@@ -1,15 +1,20 @@
 $('#window-result').hide();
 $('#log-message').hide();
 $('#close').hide();
-//$('#send-file').hide();
+$('#add').hide();
+$('#send-file').hide();
 
 $('#close-window').click(function(event){
 	$('#window-result').hide();
 });
 
 $('#close-window-upload').click(function(event){
-	$('#send-file').hide();
+	$('#send-file').fadeOut(1000);
 });
+
+$('#add').click(function(event){
+	$('#send-file').fadeIn(1000);
+});      
 
 
 $.getJSON("json/baza.json", function(data){
@@ -71,6 +76,7 @@ window.addEventListener("load", function (event) {
 			$('#log-pass').hide();
 			$('#open').hide();
 			$('#close').fadeIn(1000);
+			$('#add').fadeIn(1000);
 			$('#log-message').fadeIn(1000);
             console.log('Nawiązano połączenie przez Socket.io');
             socket.emit('login', username.value);
@@ -94,6 +100,7 @@ window.addEventListener("load", function (event) {
 			$("#login").prop('disabled', false);
 			$('#log-message').hide();
 			$('#close').hide();
+			$('#add').hide();
 			$('#open').fadeIn(1000);
 			$('#log-pass').fadeIn();
 			socket.io.disconnect();
@@ -120,6 +127,7 @@ window.addEventListener("load", function (event) {
 		$("#login").prop('disabled', false);
 		$('#log-message').hide();
 		$('#close').hide();
+		$('#add').hide();
 		$('#open').fadeIn(1000);
 		$('#log-pass').fadeIn();
         message.textContent = "";

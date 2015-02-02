@@ -60,7 +60,7 @@ fs.readFile('public/json/baza.json', 'utf-8', function (err, data) {
         if (done === true) {
             console.log(req.files);
             console.log('Plik wrzucony');
-            res.redirect('back');
+            //res.redirect('back');
         } 
         else {
             console.log('Blad pliku');        

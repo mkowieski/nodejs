@@ -18,9 +18,11 @@
 				</tr>
 				<tr id='log-message'>
 					<td>Zalogowany jako: <span id='target-name'></span></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td style='text-align: right'><input id='close' type='button' value='Wyloguj' /></td>
+					<td style='text-align: right'><input id='add' type='button' value='Dodaj film' /></td>
 				</tr>
 			</table>
 		</div>
@@ -69,7 +71,8 @@
 	</div>
 	<div id='send-file'>
 		<div id='close-window-upload'><img src="images/close.png" alt="" /></div>
-		<form id="uploadForm" enctype="multipart/form-data" action="/" method    =  "post">
+		<form id="uploadForm" enctype="multipart/form-data" action="/" method="post">
+			<input type="text" name="username" />
 			<input type="file" name="userPhoto" />
 			<input type="submit" value="Upload Image" name="submit">
 		</form>
