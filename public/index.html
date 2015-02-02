@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Biblioteka multimedialna by Mirosław Kowieski</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/styl.css">
+</head>
+
+<body>
+	<header>
+		<div id='login-panel'>
+			<table>
+				<tr id='log-pass'>
+					<td><input type='text' id='username' placeholder='Username' /></td>
+					<td><input id='open' type='button' value='Zaloguj' /></td>
+					<td><p id='error'></p></td>
+				</tr>
+				<tr id='log-message'>
+					<td>Zalogowany jako: <span id='target-name'></span></td>
+				</tr>
+				<tr>
+					<td style='text-align: right'><input id='close' type='button' value='Wyloguj' /></td>
+				</tr>
+			</table>
+		</div>
+	</header>
+	<section>
+		<div id='gallery'></div>
+	</section>
+	<footer>
+		2015 ® Copyright by Mirosław Kowieski
+		<div id='out'></div>
+	</footer>
+	<div id='window-result'>
+		<div id='close-window'><img src="images/close.png" alt="" /></div>
+		<section>
+			<div id='left'>
+				<div id='image'>
+					<img class='picture' src="images/test.jpg" alt="" />
+				</div>
+				<div id='data'>
+					<table>
+						<tr>
+							<td>Tytuł filmu:</td>
+							<td id='title'></td>
+						</tr>
+						<tr>
+							<td>Rok produkcji:</td>
+							<td id='year'></td>
+						</tr>
+					</table>
+				</div>
+				<div id='description'></div>
+			</div>
+			<div id='right'>
+				<table>
+					<tr>
+						<td><input id='text' type='text' placeholder='Komentarz...' /></td>
+						<td><input id="send" type="button" value="Wyślij" /></td>
+					</tr>
+					<tr>
+						<td><div id='message'>Aby zobaczyć albo dodawać komentarze musisz się zalogować.</div></td>
+						<td id="result"></td>
+					</tr>
+				</table>
+			</div>
+		</section>
+	</div>
+	<div id='send-file'>
+		<div id='close-window-upload'><img src="images/close.png" alt="" /></div>
+		<form id="uploadForm" enctype="multipart/form-data" action="/" method    =  "post">
+			<input type="file" name="userPhoto" />
+			<input type="submit" value="Upload Image" name="submit">
+		</form>
+	</div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/skrypt.js"></script>
+  <script src="/js/data.js"></script>
+</body>
+
+</html>

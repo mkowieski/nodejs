@@ -1,0 +1,18 @@
+{
+    "movies": [
+        {
+            "Id": "0",
+            "Name": "TEST",
+            "Year": "1999",
+            "Description": "opis swierszczyki",
+            "Image": "test"
+        },
+        {
+            "Id": "0",
+            "Name": "TEST",
+            "Year": "1999",
+            "Description": "opis swierszczyki",
+            "Image": "test"
+        }
+    ]
+}
