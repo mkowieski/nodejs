@@ -79,24 +79,54 @@ fs.readFile('public/json/baza.json', 'utf-8', function (err, data) {
 var owner = {};
 var history = [];
 var room = [];
+var comment = {};
+var comment_tab = [];
 
 io.sockets.on("connection", function (socket) {	  
-  socket.on("login", function(username) {
-	if(username == ""){
-		socket.emit('noName');
-	}else{
-		if (owner[username]) {
-		  socket.emit('usernameNotUnique');
-		} else {
-		  socket.username = username;
-		  owner[username] = socket;
-		  for ( var i = 0; i < history.length ; i++ ) {
-			socket.emit("echo", history[i], false);
-		  }
-		  //socket.broadcast.emit("echo", "Użytkownik " + socket.username + " zalogował się.", true);
+    socket.on("login", function(username) {
+		if(username == ""){
+			socket.emit('noName');
+		}else{
+			if (owner[username]) {
+			  socket.emit('usernameNotUnique');
+			} else {
+			  socket.username = username;
+			  owner[username] = socket;
+			  for ( var i = 0; i < history.length ; i++ ) {
+				socket.emit("echo", history[i], false);
+			  }
+			  
+			  //socket.broadcast.emit("echo", "Użytkownik " + socket.username + " zalogował się.", true);
+			}
 		}
-	}
-  }); 
+    }); 
+	
+	//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
+	/*socket.on("comment", function(dane){
+		//console.log(data.id);
+		fs.readFile('public/json/komentarze.json', 'utf-8', function (err, data) {
+			if (err) throw err;
+			var json = JSON.parse(data);
+			
+			var obj = {
+                "Id": dane.id,
+				"Text": dane.text,
+				"Username": dane.username
+            };
+            json.comments.unshift(obj);
+            
+            fs.writeFile('public/json/komentarze.json', JSON.stringify(json, null, 4), function(err) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log("Dane zostały zapisane do: komentarze.json");
+                }
+            });
+		});
+		
+		//comment_tab.push(data);
+		//comment["comments"] = comment_tab;
+	});*/
   
     socket.on("message", function (data) {
 		var date = new Date(),

@@ -1,8 +1,17 @@
 {
     "movies": [
         {
+            "Id": "4",
+            "Name": "W pustyni",
+            "Year": "2002",
+            "Genre": "Biograficzny",
+            "Description": "opis w pustyni",
+            "Image": "Desert.jpg",
+            "Author": "admin"
+        },
+        {
             "Id": "3",
-            "Name": "Iwona",
+            "Name": "Biegacz",
             "Year": "1982",
             "Genre": "Sci-Fi",
             "Description": "nie oglądaj tego",
@@ -11,7 +20,7 @@
         },
         {
             "Id": "2",
-            "Name": "Iwona 2",
+            "Name": "Iwona",
             "Year": "1992",
             "Genre": "Komedia",
             "Description": "malina ze szczina",

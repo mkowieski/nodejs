@@ -29,8 +29,8 @@ $('#add').click(function(event){
 	$('#uploadForm input[name="author"]').val($('#username').val());
 });      
 
-var out = "";
-	var title = "", year = "", genre = "", description = "", author = "", image = "";
+	var out = ""; //result = ""; //////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
+	var id = "", title = "", year = "", genre = "", description = "", author = "", image = "";
 setInterval(function(){
 	$.getJSON("json/baza.json", function(data){
 		var movies = [];
@@ -51,6 +51,8 @@ setInterval(function(){
 	});	
 },500);
 
+
+
 $('#gallery').click(function(event){
 	$.getJSON("json/baza.json", function(data){
 		var movies = [];
@@ -63,6 +65,7 @@ $('#gallery').click(function(event){
 		for(var i=0;i<movies.length;i++){
 			if(movies[i].Id == event.target.id){
 				$('#window-result').show();
+				id += movies[i].Id;
 				title += movies[i].Name;
 				year += movies[i].Year;
 				genre += movies[i].Genre;
@@ -71,13 +74,15 @@ $('#gallery').click(function(event){
 				image += movies[i].Image;
 			}
 		}
-
+		
+		document.getElementById('id-show').value = id;
 		document.getElementById('title').innerHTML = title;
 		document.getElementById('year').innerHTML = year;
 		document.getElementById('genre').innerHTML = genre;
 		document.getElementById('description').innerHTML = description;
 		document.getElementById('author').innerHTML = author;
 		document.getElementById('image-target').src = "images/" + image;
+		id = "";
 		title = "";
 		year = "";
 		genre = "";
@@ -85,6 +90,27 @@ $('#gallery').click(function(event){
 		author = "";
 		image = "";
 	});
+	
+	//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
+	/*$.getJSON("json/komentarze.json", function(data){
+		var comments = [];
+		
+		$.each(data, function(key, val){
+			for(var i=0;i<val.length;i++){
+				comments.push(val[i]);
+			}
+		});
+		for(var i=0;i<comments.length;i++){
+			if(comments[i].Id == event.target.id){
+				result += "<font size='1px'>[Skomentował <b>" + comments[i].Username + "</b>]</font><br><font size='2px'>" + comments[i].Text + "</font><br><br>";
+				//result += "Text: " + comments[i].Text + "Username: " + comments[i].Username;
+			}
+		}
+		console.log(result);
+		document.getElementById('message').innerHTML = result;
+		result = "";
+	});*/
+	
 });
 
 
@@ -93,9 +119,7 @@ $('#gallery').click(function(event){
 /* global io: false */
 "use strict";
 
-// Inicjalizacja
 window.addEventListener("load", function (event) {
-    //var status = document.getElementById("status");
     var open = document.getElementById("open");
     var close = document.getElementById("close");
     var send = document.getElementById("send");
@@ -103,13 +127,13 @@ window.addEventListener("load", function (event) {
     var message = document.getElementById("message");
     var username = document.getElementById("username");
 	var addFile = document.getElementById("addFile");
+	var id = document.getElementById('id-show');
     var socket;
-	
+
     $(document).bind('keypress', function(e) {
        var code = e.keyCode || e.which;
        if(code == 13) {
           socket.emit('message', {text: text.value, username: username.value});
-          console.log('Wysłałem wiadomość: ' + text.value);
           text.value = "";
        }
     });
@@ -119,7 +143,6 @@ window.addEventListener("load", function (event) {
     close.disabled = true;
     send.disabled = true;
 
-    // Po kliknięciu guzika „Połącz” tworzymy nowe połączenie WS
     open.addEventListener("click", function (event) {
         open.disabled = true;
         if (!socket || !socket.connected) {
@@ -199,7 +222,6 @@ window.addEventListener("load", function (event) {
 		socket.emit("addFile", username.value);
 	});*/
     
-    // Zamknij połączenie po kliknięciu guzika „Rozłącz”
     close.addEventListener("click", function (event) {
         close.disabled = true;
         send.disabled = true;
@@ -215,10 +237,11 @@ window.addEventListener("load", function (event) {
         console.dir(socket);
     });
 
-    // Wyślij komunikat do serwera po naciśnięciu guzika „Wyślij”
     send.addEventListener("click", function (event) {
         socket.emit('message', {text: text.value, username: username.value});
-        console.log('Wysłałem wiadomość: ' + text.value);
+		//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
+		//socket.emit('comment', {id: id.value, text: text.value, username: username.value});
+		
         text.value = "";
     });
 });
