@@ -12,8 +12,6 @@ var fs = require("fs");
 
 var done = false;
 
-var nameFile = "";
-
 app.use(less(path.join(__dirname, 'public')));
 app.use('/images', static(__dirname + '/public/images'));
 app.use(static(path.join(__dirname, '/public')));
