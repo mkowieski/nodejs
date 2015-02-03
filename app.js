@@ -12,6 +12,8 @@ var fs = require("fs");
 
 var done = false;
 
+var nameFile = "";
+
 app.use(less(path.join(__dirname, 'public')));
 app.use('/images', static(__dirname + '/public/images'));
 app.use(static(path.join(__dirname, '/public')));
@@ -25,24 +27,9 @@ fs.readFile('public/json/baza.json', 'utf-8', function (err, data) {
     app.use(multer({
         dest: './public/images/',
         rename: function (fieldname, filename) {
-            var obj = {
-                "Id": "0",
-                "Name": "TEST",
-                "Year":"1999", 
-				"Description":"opis swierszczyki", 
-				"Image":"test"
-            };
-            json.movies.unshift(obj);
             
-            fs.writeFile('public/json/baza.json', JSON.stringify(json, null, 4), function(err) {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log("Dane zostały zapisane do: baza.json");
-                }
-            });
 
-            return filename + "-" + Date.now();
+            return filename;
             },
         onFileUploadStart: function (file) {
           console.log(file.originalname + ' is starting ...');
@@ -59,7 +46,28 @@ fs.readFile('public/json/baza.json', 'utf-8', function (err, data) {
     app.post('/', function (req, res) {        
         if (done === true) {
             console.log(req.files);
+			//console.log(req.files.username);
             console.log('Plik wrzucony');
+			
+			var obj = {
+                "Id": req.body.id,
+                "Name": req.body.name,
+                "Year": req.body.year, 
+				"Genre": req.body.genre,
+				"Description": req.body.description, 
+				"Image": req.files.userPhoto.name,
+				"Author": req.body.author
+            };
+            json.movies.unshift(obj);
+            
+            fs.writeFile('public/json/baza.json', JSON.stringify(json, null, 4), function(err) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log("Dane zostały zapisane do: baza.json");
+                }
+            });
+
             //res.redirect('back');
         } 
         else {
@@ -76,20 +84,45 @@ var room = [];
 
 io.sockets.on("connection", function (socket) {	  
   socket.on("login", function(username) {
-	
-    if (owner[username]) {
-      socket.emit('usernameNotUnique');
-    } else {
-      socket.username = username;
-      owner[username] = socket;
-      for ( var i = 0; i < history.length ; i++ ) {
-        socket.emit("echo", history[i], false);
-      }
-      //socket.broadcast.emit("echo", "Użytkownik " + socket.username + " zalogował się.", true);
-    }
-  });  
+	if(username == ""){
+		socket.emit('noName');
+	}else{
+		if (owner[username]) {
+		  socket.emit('usernameNotUnique');
+		} else {
+		  socket.username = username;
+		  owner[username] = socket;
+		  for ( var i = 0; i < history.length ; i++ ) {
+			socket.emit("echo", history[i], false);
+		  }
+		  //socket.broadcast.emit("echo", "Użytkownik " + socket.username + " zalogował się.", true);
+		}
+	}
+  }); 
   
     socket.on("message", function (data) {
+		var date = new Date(),
+			hour = date.getHours(),
+			minute = date.getMinutes(),
+			day = date.getDate(),
+			month = date.getMonth()+1,
+			year = date.getFullYear();
+			
+		if(minute<10){
+			minute = "0" + minute;
+		}
+		if(hour<10){
+			hour = "0" + hour;
+		}
+		if(day<10){
+			day = "0" + day;
+		}
+		if(month<10){
+			month = "0" + month;
+		}
+		
+		data.timestamp = hour + ":" + minute + " " + day + "." + month + "." + year;
+		
 	    history.push(data);
         io.sockets.emit("echo", data);
     });

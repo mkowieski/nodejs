@@ -12,9 +12,10 @@
 		<div id='login-panel'>
 			<table>
 				<tr id='log-pass'>
-					<td><input type='text' id='username' placeholder='Username' /></td>
+					<td><input type='text' id='username' placeholder='Użytkownik' /></td>
 					<td><input id='open' type='button' value='Zaloguj' /></td>
 					<td><p id='error'></p></td>
+					<!--<div id='addFile'>Dodaj</div>-->
 				</tr>
 				<tr id='log-message'>
 					<td>Zalogowany jako: <span id='target-name'></span></td>
@@ -39,7 +40,7 @@
 		<section>
 			<div id='left'>
 				<div id='image'>
-					<img class='picture' src="images/test.jpg" alt="" />
+					<img class='picture' id='image-target' src="images/test.jpg" alt="" />
 				</div>
 				<div id='data'>
 					<table>
@@ -50,6 +51,14 @@
 						<tr>
 							<td>Rok produkcji:</td>
 							<td id='year'></td>
+						</tr>
+						<tr>
+							<td>Gatunek:</td>
+							<td id='genre'></td>
+						</tr>
+						<tr>
+							<td>Dodał:</td>
+							<td id='author'></td>
 						</tr>
 					</table>
 				</div>
@@ -72,15 +81,91 @@
 	<div id='send-file'>
 		<div id='close-window-upload'><img src="images/close.png" alt="" /></div>
 		<form id="uploadForm" enctype="multipart/form-data" action="/" method="post">
-			<input type="text" name="username" />
-			<input type="file" name="userPhoto" />
-			<input type="submit" value="Upload Image" name="submit">
+			<input type="hidden" name="author" />
+			<input type="hidden" name="id" />
+			<table>
+				<tr>
+					<td>Tytuł</td>
+					<td><input type="text" name="name" /></td>
+				</tr>
+				<tr>
+					<td>Rok produkcji</td>
+					<td><input type="text" name="year" /></td>
+				</tr>
+				<tr>
+					<td>Gatunek</td>
+					<td>
+						<select name="genre">  
+							<option value="Akcja" selected>Akcja</option> 
+							<option value="Animacja">Animacja</option> 
+							<option value="Anime">Anime</option> 
+							<option value="Baśń">Baśń</option> 
+							<option value="Biblijny">Biblijny</option> 
+							<option value="Biograficzny">Biograficzny</option> 
+							<option value="Czarna komedia">Czarna komedia</option> 
+							<option value="Dla dzieci">Dla dzieci</option> 
+							<option value="Dla młodzieży">Dla młodzieży</option> 
+							<option value="Dokumentalny">Dokumentalny</option> 
+							<option value="Dramat">Dramat</option> 
+							<option value="Dramat historyczny">Dramat historyczny</option> 
+							<option value="Dramat obyczajowy">Dramat obyczajowy</option> 
+							<option value="Dramat sądowy">Dramat sądowy</option> 
+							<option value="Dreszczowiec">Dreszczowiec</option> 
+							<option value="Edukacyjny">Edukacyjny</option> 
+							<option value="Erotyczny">Erotyczny</option> 
+							<option value="Familijny">Familijny</option> 
+							<option value="Fantasy">Fantasy</option> 
+							<option value="Gangsterski">Gangsterski</option> 
+							<option value="Historyczny">Historyczny</option> 
+							<option value="Horror">Horror</option> 
+							<option value="Karate">Karate</option> 
+							<option value="Katastroficzny">Katastroficzny</option> 
+							<option value="Komedia">Komedia</option> 
+							<option value="Komedia dokumentalna">Komedia dokumentalna</option> 
+							<option value="Komedia kryminalna">Komedia kryminalna</option> 
+							<option value="Komedia obyczajowa">Komedia obycz.</option> 
+							<option value="Komedia romantyczna">Komedia rom.</option> 
+							<option value="Krótkometrażowy">Krótkometrażowy</option> 
+							<option value="Kryminał">Kryminał</option> 
+							<option value="Musical">Musical</option> 
+							<option value="Muzyczny">Muzyczny</option> 
+							<option value="Obyczajowy">Obyczajowy</option> 
+							<option value="Prawniczy">Prawniczy</option> 
+							<option value="Przygodowy">Przygodowy</option> 
+							<option value="Przyrodniczy">Przyrodniczy</option> 
+							<option value="Psychologiczny">Psychologiczny</option> 
+							<option value="Religijny">Religijny</option> 
+							<option value="Romans">Romans</option>
+							<option value="Sci-Fi">Sci-Fi</option> 
+							<option value="Sensacyjny">Sensacyjny</option> 
+							<option value="Sportowy">Sportowy</option> 
+							<option value="Szpiegowski">Szpiegowski</option> 
+							<option value="Sztuki walki">Sztuki walki</option> 
+							<option value="Thriller">Thriller</option> 
+							<option value="Western">Western</option> 
+							<option value="Wojenny">Wojenny</option> 
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Opis</td>
+					<td><input type="text" name="description" /></td>
+				</tr>
+				<tr>
+					<td>Okładka</td>
+					<td><input type="file" name="userPhoto" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Upload Image" name="submit"></td>
+				</tr>
+				
+			</table>			
 		</form>
 	</div>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/skrypt.js"></script>
-  <script src="/js/data.js"></script>
 </body>
 
 </html>

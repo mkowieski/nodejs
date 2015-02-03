@@ -1,18 +1,31 @@
 {
     "movies": [
         {
-            "Id": "0",
-            "Name": "TEST",
-            "Year": "1999",
-            "Description": "opis swierszczyki",
-            "Image": "test"
+            "Id": "3",
+            "Name": "Iwona",
+            "Year": "1982",
+            "Genre": "Sci-Fi",
+            "Description": "nie oglądaj tego",
+            "Image": "czyzby-biegacz-a-alkaidy-z.jpg",
+            "Author": "admin"
         },
         {
-            "Id": "0",
-            "Name": "TEST",
-            "Year": "1999",
-            "Description": "opis swierszczyki",
-            "Image": "test"
+            "Id": "2",
+            "Name": "Iwona 2",
+            "Year": "1992",
+            "Genre": "Komedia",
+            "Description": "malina ze szczina",
+            "Image": "first-site.jpg",
+            "Author": "mirko"
+        },
+        {
+            "Id": "1",
+            "Name": "Marmurowy grzyb",
+            "Year": "1990",
+            "Genre": "Komedia romantyczna",
+            "Description": "opis jest bardzo krótki, dlatego nie trzeba było go pisać",
+            "Image": "old-bg.jpg",
+            "Author": "admin"
         }
     ]
 }
