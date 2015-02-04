@@ -65,7 +65,7 @@ fs.readFile('public/json/baza.json', 'utf-8', function (err, data) {
                   console.log("Dane zostały zapisane do: baza.json");
                 }
             });
-
+            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             //res.redirect('back');
         } 
         else {
@@ -102,8 +102,30 @@ io.sockets.on("connection", function (socket) {
     }); 
 	
 	//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
-	/*socket.on("comment", function(dane){
+	socket.on("comment", function(dane){
 		//console.log(data.id);
+		var date = new Date(),
+			hour = date.getHours(),
+			minute = date.getMinutes(),
+			day = date.getDate(),
+			month = date.getMonth()+1,
+			year = date.getFullYear();
+			
+		if(minute<10){
+			minute = "0" + minute;
+		}
+		if(hour<10){
+			hour = "0" + hour;
+		}
+		if(day<10){
+			day = "0" + day;
+		}
+		if(month<10){
+			month = "0" + month;
+		}
+		
+		dane.timestamp = hour + ":" + minute + " " + day + "." + month + "." + year;
+		
 		fs.readFile('public/json/komentarze.json', 'utf-8', function (err, data) {
 			if (err) throw err;
 			var json = JSON.parse(data);
@@ -111,9 +133,10 @@ io.sockets.on("connection", function (socket) {
 			var obj = {
                 "Id": dane.id,
 				"Text": dane.text,
-				"Username": dane.username
+				"Username": dane.username,
+				"Timestamp": dane.timestamp
             };
-            json.comments.unshift(obj);
+            json.comments.push(obj);
             
             fs.writeFile('public/json/komentarze.json', JSON.stringify(json, null, 4), function(err) {
                 if (err) {
@@ -126,7 +149,7 @@ io.sockets.on("connection", function (socket) {
 		
 		//comment_tab.push(data);
 		//comment["comments"] = comment_tab;
-	});*/
+	});
   
     socket.on("message", function (data) {
 		var date = new Date(),

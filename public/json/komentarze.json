@@ -1,39 +1,40 @@
 {
     "comments": [
         {
-            "Id": "4",
-            "Text": "aha",
-            "Username": "julian"
-        },
-        {
-            "Id": "2",
-            "Text": "ghhagagaga",
-            "Username": "perfect"
-        },
-        {
             "Id": "3",
-            "Text": "hahahaha",
-            "Username": "mirokowia"
-        },
-        {
-            "Id": "2",
             "Text": "54321",
-            "Username": "mirokowia"
+            "Username": "admin",
+            "Timestamp": "10:32 04.02.2015"
         },
         {
             "Id": "2",
-            "Text": "12312312",
-            "Username": "mirokowia"
-        },
-        {
-            "Id": "2",
-            "Text": "321",
-            "Username": "mirokowia"
+            "Text": "test",
+            "Username": "admin",
+            "Timestamp": "10:31 04.02.2015"
         },
         {
             "Id": "2",
             "Text": "123",
-            "Username": "per"
+            "Username": "admin",
+            "Timestamp": "10:31 04.02.2015"
+        },
+        {
+            "Id": "1",
+            "Text": "komenatarz",
+            "Username": "admin",
+            "Timestamp": "10:30 04.02.2015"
+        },
+        {
+            "Id": "5",
+            "Text": "bardzo fajny film 10/10",
+            "Username": "perfect",
+            "Timestamp": "10:37 04.02.2015"
+        },
+        {
+            "Id": "4",
+            "Text": "aha",
+            "Username": "perfect",
+            "Timestamp": "10:37 04.02.2015"
         }
     ]
 }

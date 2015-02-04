@@ -29,7 +29,7 @@ $('#add').click(function(event){
 	$('#uploadForm input[name="author"]').val($('#username').val());
 });      
 
-	var out = ""; //result = ""; //////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
+	var out = "", result = ""; //////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
 	var id = "", title = "", year = "", genre = "", description = "", author = "", image = "";
 setInterval(function(){
 	$.getJSON("json/baza.json", function(data){
@@ -92,7 +92,7 @@ $('#gallery').click(function(event){
 	});
 	
 	//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
-	/*$.getJSON("json/komentarze.json", function(data){
+	$.getJSON("json/komentarze.json", function(data){
 		var comments = [];
 		
 		$.each(data, function(key, val){
@@ -102,17 +102,39 @@ $('#gallery').click(function(event){
 		});
 		for(var i=0;i<comments.length;i++){
 			if(comments[i].Id == event.target.id){
-				result += "<font size='1px'>[Skomentował <b>" + comments[i].Username + "</b>]</font><br><font size='2px'>" + comments[i].Text + "</font><br><br>";
+				result += "<br><font size='1px'>[Skomentował <b>" + comments[i].Username + "</b>, " + comments[i].Timestamp + "]</font><br><font size='2px'>" + comments[i].Text + "</font><br>";
 				//result += "Text: " + comments[i].Text + "Username: " + comments[i].Username;
 			}
 		}
 		console.log(result);
 		document.getElementById('message').innerHTML = result;
 		result = "";
-	});*/
+	});
 	
 });
 
+/*$("#uploadForm").submit(function(event) {  
+	var $form = $(this);
+	event.preventDefault();
+	var formData = new FormData($(this)[0]);
+	$.ajax({ // wysyłamy ajaxem
+		url: $form.attr("action"), // tam gdzie wskazuje atrybut action
+		type: $form.attr("method"), // metodą jaką ma zdefiniowany formularz
+		data: formData, // serializujemy formularz i ustawiamy to jako dane do wysłania ajaxem
+		cache: false,
+        contentType: false,
+        processData: false
+	}).done(function () { // gdy udało się wysłać
+		$("#send-file").fadeOut(1000);
+	}).fail(function () { // gdy wystąpił błąd
+		$("#foo").text("Błąd!");
+	}); 
+	return false;
+}); */
+
+$('#uploadSubmit').click(function(){
+	$('#send-file').fadeOut(1000);
+});
 
 
 /* jshint browser: true, globalstrict: true, devel: true */
@@ -134,6 +156,7 @@ window.addEventListener("load", function (event) {
        var code = e.keyCode || e.which;
        if(code == 13) {
           socket.emit('message', {text: text.value, username: username.value});
+		  socket.emit('comment', {id: id.value, text: text.value, username: username.value});
           text.value = "";
        }
     });
@@ -240,7 +263,7 @@ window.addEventListener("load", function (event) {
     send.addEventListener("click", function (event) {
         socket.emit('message', {text: text.value, username: username.value});
 		//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
-		//socket.emit('comment', {id: id.value, text: text.value, username: username.value});
+		socket.emit('comment', {id: id.value, text: text.value, username: username.value});
 		
         text.value = "";
     });
