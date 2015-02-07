@@ -1,6 +1,69 @@
 {
     "movies": [
         {
+            "Id": "11",
+            "Name": "fgbfasbakjsfakfsk",
+            "Year": "1281",
+            "Genre": "Akcja",
+            "Description": "12412rf1ffAFA",
+            "Image": "old-bg.jpg",
+            "Author": "mirek"
+        },
+        {
+            "Id": "10",
+            "Name": "wqfqfqfqw",
+            "Year": "1899",
+            "Genre": "Akcja",
+            "Description": "fqwfqwfqfq",
+            "Image": "first-site.jpg",
+            "Author": "admin"
+        },
+        {
+            "Id": "9",
+            "Name": "afasfsaf",
+            "Year": "1992",
+            "Genre": "Akcja",
+            "Description": "fwqfqwfq",
+            "Image": "first-site.jpg",
+            "Author": "admin"
+        },
+        {
+            "Id": "8",
+            "Name": "Pracodawcy 3",
+            "Year": "1999",
+            "Genre": "Akcja",
+            "Description": "qwfqfqcq",
+            "Image": "first-site.jpg",
+            "Author": "admin"
+        },
+        {
+            "Id": "7",
+            "Name": "Pracodawcy 2",
+            "Year": "1990",
+            "Genre": "Akcja",
+            "Description": "qffqwfq",
+            "Image": "first-site.jpg",
+            "Author": "admin"
+        },
+        {
+            "Id": "6",
+            "Name": "Pracodawcy",
+            "Year": "2012",
+            "Genre": "Akcja",
+            "Description": "qwerqwr",
+            "Image": "first-site.jpg",
+            "Author": "admin"
+        },
+        {
+            "Id": "5",
+            "Name": "Test nazwa",
+            "Year": "1992",
+            "Genre": "Dramat",
+            "Description": "opis test nazwa",
+            "Image": "first-site.jpg",
+            "Author": "admin"
+        },
+        {
             "Id": "4",
             "Name": "W pustyni",
             "Year": "2002",

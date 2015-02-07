@@ -1,0 +1,100 @@
+/*setInterval(function(){*/
+	/*$.getJSON("json/baza.json", function(data){
+		var movies = [];
+		
+		$.each(data, function(key, val){
+			for(var i=0;i<val.length;i++){
+				movies.push(val[i]);
+			}
+		});
+
+		for(var i=0;i<movies.length;i++){
+			out += "<div><img class='picture' id='" + movies[i].Id + "' src='images/" + movies[i].Image + "' alt='' /><span>" + movies[i].Name + "</span></div>";
+		}
+
+		document.getElementById('gallery').innerHTML = out;
+
+		out = "";
+	});	*/
+/*},500);*/
+
+
+
+/*$('#gallery').click(function(event){
+	$.getJSON("json/baza.json", function(data){
+		var movies = [];
+		
+		$.each(data, function(key, val){
+			for(var i=0;i<val.length;i++){
+				movies.push(val[i]);
+			}
+		});
+		for(var i=0;i<movies.length;i++){
+			if(movies[i].Id == event.target.id){
+				$('#window-result').show();
+				id += movies[i].Id;
+				title += movies[i].Name;
+				year += movies[i].Year;
+				genre += movies[i].Genre;
+				description += movies[i].Description;
+				author += movies[i].Author;
+				image += movies[i].Image;
+			}
+		}
+		
+		document.getElementById('id-show').value = id;
+		document.getElementById('title').innerHTML = title;
+		document.getElementById('year').innerHTML = year;
+		document.getElementById('genre').innerHTML = genre;
+		document.getElementById('description').innerHTML = description;
+		document.getElementById('author').innerHTML = author;
+		document.getElementById('image-target').src = "images/" + image;
+		id = "";
+		title = "";
+		year = "";
+		genre = "";
+		description = "";
+		author = "";
+		image = "";
+	});
+	
+	//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
+	$.getJSON("json/komentarze.json", function(data){
+		var comments = [];
+		
+		$.each(data, function(key, val){
+			for(var i=0;i<val.length;i++){
+				comments.push(val[i]);
+			}
+		});
+		for(var i=0;i<comments.length;i++){
+			if(comments[i].Id == event.target.id){
+				result += "<br><font size='1px'>[Skomentowa³ <b>" + comments[i].Username + "</b>, " + comments[i].Timestamp + "]</font><br><font size='2px'>" + comments[i].Text + "</font><br>";
+				//result += "Text: " + comments[i].Text + "Username: " + comments[i].Username;
+			}
+		}
+		console.log(result);
+		document.getElementById('message').innerHTML = result;
+		result = "";
+	});
+	
+});*/
+
+/*$("#uploadForm").submit(function(event) {  
+	var $form = $(this);
+	event.preventDefault();
+	var formData = new FormData($(this)[0]);
+	$.ajax({ // wysy³amy ajaxem
+		url: $form.attr("action"), // tam gdzie wskazuje atrybut action
+		type: $form.attr("method"), // metod¹ jak¹ ma zdefiniowany formularz
+		data: formData, // serializujemy formularz i ustawiamy to jako dane do wys³ania ajaxem
+		cache: false,
+        contentType: false,
+        processData: false
+	}).done(function () { // gdy uda³o siê wys³aæ
+		$("#send-file").fadeOut(1000);
+	}).fail(function () { // gdy wyst¹pi³ b³¹d
+		$("#foo").text("B³¹d!");
+	}); 
+	return false;
+}); */

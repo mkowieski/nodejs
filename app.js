@@ -66,7 +66,7 @@ fs.readFile('public/json/baza.json', 'utf-8', function (err, data) {
                 }
             });
             //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            //res.redirect('back');
+            res.end('koniec');
         } 
         else {
             console.log('Blad pliku');        
@@ -81,8 +81,16 @@ var history = [];
 var room = [];
 var comment = {};
 var comment_tab = [];
+var test;
+
+fs.readFile('public/json/baza.json', 'utf-8', function (err, data){
+	if (err) throw err;
+	test = JSON.parse(data);
 
 io.sockets.on("connection", function (socket) {	  
+
+
+		
     socket.on("login", function(username) {
 		if(username == ""){
 			socket.emit('noName');
@@ -95,15 +103,51 @@ io.sockets.on("connection", function (socket) {
 			  for ( var i = 0; i < history.length ; i++ ) {
 				socket.emit("echo", history[i], false);
 			  }
-			  
+			  console.log(test);
 			  //socket.broadcast.emit("echo", "Użytkownik " + socket.username + " zalogował się.", true);
 			}
 		}
     }); 
 	
+	socket.on('baza', function(id){
+		
+		fs.readFile('public/json/baza.json', 'utf-8', function (err, data){
+			if (err) throw err;
+			var json = JSON.parse(data);
+
+			for(var i=0; i<json.movies.length;i++){
+				if(json.movies[i].Id == id){
+					socket.emit("pokaz_dane", json.movies[i]);
+				};
+			};
+		});
+		fs.readFile('public/json/komentarze.json', 'utf-8', function (err, data){
+			if (err) throw err;
+			var json = JSON.parse(data);
+			var data_test = [];
+			for(var i=0; i<json.comments.length;i++){
+				if(json.comments[i].Id == id){
+					data_test.push(json.comments[i]);
+					
+				};
+			};
+			socket.emit("pokaz_komentarze", data_test);
+		});
+	});
+	
+	socket.on('show_pic', function(){
+		
+		fs.readFile('public/json/baza.json', 'utf-8', function (err, data){
+			if (err) throw err;
+			var json = JSON.parse(data);	
+			
+			io.sockets.emit('show_pictures', json.movies);
+		});
+		
+	});
+	
 	//////////////////////////// INNE ROZWIAZANIE komentarzy by mirek kowieski
 	socket.on("comment", function(dane){
-		//console.log(data.id);
 		var date = new Date(),
 			hour = date.getHours(),
 			minute = date.getMinutes(),
@@ -146,9 +190,6 @@ io.sockets.on("connection", function (socket) {
                 }
             });
 		});
-		
-		//comment_tab.push(data);
-		//comment["comments"] = comment_tab;
 	});
   
     socket.on("message", function (data) {
@@ -177,6 +218,7 @@ io.sockets.on("connection", function (socket) {
 	    history.push(data);
         io.sockets.emit("echo", data);
     });
+	
     socket.on("error", function (err) {
         console.dir(err);
     });
@@ -186,6 +228,8 @@ io.sockets.on("connection", function (socket) {
         delete owner[socket.username];
     });
 });
+
+}); // zamkniecie readfile
 
 httpServer.listen(port, function () {
     console.log('Serwer HTTP działa na porcie ' + port);
